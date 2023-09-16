@@ -9,8 +9,21 @@ import PartsFactory.IPartsFactory;
 import PartsFactory.PenzaCarPartsFactory;
 
 public class PenzaCarFactory extends CarFactory{
+
+    public enum CarOptions {
+        CompactCar("CompactCar"),
+        CrossRoadCar("CrossRoadCar"),
+        SportCar("SportCar");
+        private final String value;
+        CarOptions(String value) {
+            this.value = value;
+        }
+        public String valueOf() {return value;}
+
+
+    }
     @Override
-    protected ICar createCar(String carType){
+    protected ICar createCar(String carType) throws Error{
         IPartsFactory partsFactory =  new PenzaCarPartsFactory();
 
         switch (carType){
@@ -25,8 +38,11 @@ public class PenzaCarFactory extends CarFactory{
 
             default:
                 System.out.println("Fuk u fuking fuk");
-                return null;
+                throw new Error("Unregistered car type!");
 
         }
+    }
+    public ICar getCar(PenzaCarFactory.CarOptions carOptions) {
+        return super.getCar(carOptions.valueOf());
     }
 }

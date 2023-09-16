@@ -12,7 +12,6 @@ public abstract class CarFactory  {
         car.paintCar();
         car.installEngine();
         car.installWheels();
-        car.paintCar();
         return car;
     }
 }
